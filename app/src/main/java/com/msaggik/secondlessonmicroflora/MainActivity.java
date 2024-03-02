@@ -1,12 +1,10 @@
 package com.msaggik.secondlessonmicroflora;
 
-import androidx.annotation.NonNull;
+
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,10 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
         output = findViewById(R.id.output);
         button = findViewById(R.id.button);
+        if (savedInstanceState != null) {
+            count = savedInstanceState.getInt("count", 0);
+            output.setText("" + count);
+        }
+            button.setOnClickListener(view -> output.setText("" + countFibonacci()));
 
+    }
 
-        button.setOnClickListener(view -> output.setText("" + countFibonacci()));
-
+    @Override
+    protected void onSaveInstanceState(@Nullable Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("count", count);
     }
 
     private int countFibonacci() {
